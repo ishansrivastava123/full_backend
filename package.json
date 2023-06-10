@@ -4,9 +4,12 @@
   "description": "First One!",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "node index.js"
   },
   "author": "Ishan",
   "license": "ISC",
