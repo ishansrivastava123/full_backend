@@ -5,9 +5,11 @@ import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-mongoose.connect("mongodb://127.0.0.1:27017/", {useNewUrlParser:true, useUnifiedTopology:true}, {dbName: "backend"})
-.then(() => console.log("Database Connected!"))
-.catch((err) => console.log(err))
+const connectDB = async () => {
+    await mongoose.connect("mongodb://127.0.0.1:27017/", {useNewUrlParser:true, useUnifiedTopology:true}, {dbName: "backend"})
+    .then(() => console.log("MongoDB Connected!"))
+    .catch((err) => console.log(err))
+}
 
 const userSchema = new mongoose.Schema({
     name: String,
@@ -99,6 +101,8 @@ app.get("/logout", (req, res) => {
     res.redirect("/")
 })
 
-app.listen(5000, () => {
-    console.log("Server is working");
+connectDB().then(() => {
+    app.listen(5000, () => {
+        console.log("Listening on port 5000");
+    })
 })
